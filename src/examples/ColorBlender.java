@@ -10,12 +10,12 @@ import core.GDXGame;
 import core.GameInput;
 import core.Tile;
 
-public class Test extends GameInput {
+public class ColorBlender extends GameInput {
 	static GDXGame game;
 	Random gen = new Random();
 
 	public static void main(String[] args) {
-		Test test = new Test();
+		ColorBlender test = new ColorBlender();
 		game = new GDXGame(16, 16, "SUPER DOKAPON WORLD", test, 30);
 	}
 
