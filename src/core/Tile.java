@@ -102,11 +102,11 @@ public class Tile {
 		}
 	}
 	
-	public int countLivingNeighbors() {
+	public int countNeighborsWithColor(Color c) {
 		Tile[] neighbors = getAllNeighbors();
 		int nLiving = 0;
 		for (Tile n : neighbors) {
-			if (n.getColor().equals(Color.RED)) {
+			if (n.getColor().equals(c)) {
 				nLiving++;
 			}
 		}

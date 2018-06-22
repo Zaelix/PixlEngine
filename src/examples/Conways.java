@@ -29,12 +29,12 @@ public class Conways extends GameInput {
 		if (isMouseLeftDown) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.RED);
-			tile.setDisplayString(tile.countLivingNeighbors()+"");
+			tile.setDisplayString(tile.countNeighborsWithColor(Color.RED)+"");
 		}
 		if (isMouseRightDown) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.gray);
-			tile.setDisplayString(tile.countLivingNeighbors()+"");
+			tile.setDisplayString(tile.countNeighborsWithColor(Color.RED)+"");
 		}
 	}
 
@@ -50,12 +50,12 @@ public class Conways extends GameInput {
 		if (e.getButton() == 1) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.RED);
-			tile.setDisplayString(tile.countLivingNeighbors()+"");
+			tile.setDisplayString(tile.countNeighborsWithColor(Color.RED)+"");
 		}
 		if (e.getButton() == 3) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.gray);
-			tile.setDisplayString(tile.countLivingNeighbors()+"");
+			tile.setDisplayString(tile.countNeighborsWithColor(Color.RED)+"");
 		}
 	}
 
@@ -168,7 +168,7 @@ public class Conways extends GameInput {
 	public void updateLivingCounts() {
 		for (Tile[] tA : game.getBoard()) {
 			for (Tile t : tA) {
-				t.setDisplayString(t.countLivingNeighbors()+"");
+				t.setDisplayString(t.countNeighborsWithColor(Color.RED)+"");
 			}
 		}
 	}
