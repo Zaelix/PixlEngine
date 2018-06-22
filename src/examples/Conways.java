@@ -19,7 +19,7 @@ public class Conways extends GameInput {
 
 	public static void main(String[] args) {
 		Conways test = new Conways();
-		game = new GDXGame(200, 60, "SUPER CONWAY BROS", test, 100);
+		game = new GDXGame(12, 12, "SUPER CONWAY BROS", test, 1);
 	}
 
 	@Override
@@ -40,10 +40,12 @@ public class Conways extends GameInput {
 		if (e.getButton() == 1) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.RED);
+			tile.setDisplayString(tile.countLivingNeighbors()+"");
 		}
 		if (e.getButton() == 2) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.gray);
+			tile.setDisplayString(tile.countLivingNeighbors()+"");
 		}
 	}
 
@@ -86,6 +88,13 @@ public class Conways extends GameInput {
 		} else if (e.getKeyChar() == 'p' && isPaused) {
 			isPaused = false;
 			System.out.println("Unpaused!");
+		} else if (e.getKeyChar() == 'u') {
+			System.out.println("Updating Living Counts!");
+			for (Tile[] tA : game.getBoard()) {
+				for (Tile t : tA) {
+					t.setDisplayString(t.countLivingNeighbors()+"");
+				}
+			}
 		} else {
 			for (Tile[] tA : game.getBoard()) {
 				for (Tile t : tA) {
@@ -109,25 +118,30 @@ public class Conways extends GameInput {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		Tile[][] newBoard;
 		if (isPaused) {
 
 		} else {
-			Tile[][] newBoard = game.getBoard();
 			Tile[][] board = game.getBoard();
+			newBoard = game.getBlankBoard();
 			for (int x = 0; x < board.length; x++) {
 				for (int y = 0; y < board[0].length; y++) {
 					int nLiving = board[x][y].countLivingNeighbors();
-
+					board[x][y].setDisplayString(nLiving + "");
 					if (board[x][y].getColor().equals(Color.RED)) {
 						if (nLiving < 2 || nLiving > 3) {
+							System.out.println("Killed " +x + ", " + y);
 							newBoard[x][y].setColor(Color.gray);
 						} else {
+							System.out.println(x + ", " + y + "Stayed alive");
 							newBoard[x][y].setColor(Color.RED);
 						}
 					} else {
 						if (nLiving == 3) {
+							System.out.println("Revived " + x + ", " + y);
 							newBoard[x][y].setColor(Color.RED);
 						} else {
+							System.out.println(x + ", " + y + "Stayed dead");
 							newBoard[x][y].setColor(Color.gray);
 						}
 					}

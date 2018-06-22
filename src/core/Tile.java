@@ -12,8 +12,10 @@ public class Tile {
 	int boardX;
 	int boardY;
 	int size;
+	int livingNeighbors = 0;
 	Color color;
 	Color edgeColor;
+	String displayString = "";
 	Random gen = new Random();
 	
 	public Tile (int bX, int bY, int x, int y, int s, GDXGame g) {
@@ -23,7 +25,7 @@ public class Tile {
 		this.y = y;
 		this.size = s;
 		this.game = g;
-		this.color = new Color(100,100,100);
+		this.color = new Color(150,150,150);
 		this.edgeColor = new Color(255, 255, 255);
 	}
 	
@@ -55,6 +57,13 @@ public class Tile {
 	
 	public Color getEdgeColor() {
 		return this.edgeColor;
+	}
+	
+	public String getDisplayString() {
+		return this.displayString;
+	}
+	public void setDisplayString(String str) {
+		this.displayString = str;
 	}
 	
 	/**
@@ -101,7 +110,12 @@ public class Tile {
 				nLiving++;
 			}
 		}
+		this.livingNeighbors = nLiving;
 		return nLiving;
+	}
+	
+	public int getLivingNeighbors() {
+		return this.livingNeighbors;
 	}
 	/**
 	 * Gets all neighboring tiles of the tile that is calling the function.
@@ -285,6 +299,7 @@ public class Tile {
 		g.setColor(color);
 		g.fillRect(x, y, size, size);
 		g.setColor(edgeColor);
+		g.drawString(displayString, x, y+size);
 		g.drawRect(x, y, size, size);
 	}
 }

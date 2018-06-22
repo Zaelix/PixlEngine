@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GDXGame {
-	int width;
-	int height;
+	public int width;
+	public int height;
 	int cubeSize = 35;
 	int maxFPS = 30;
 	long elapsedTime = 0;
@@ -19,6 +19,7 @@ public class GDXGame {
 	JFrame window;
 	GamePanel panel;
 	Tile[][] board;
+	Tile[][] blankBoard;
 
 	Tile fakeTile = new Tile(1000, 1000, 1000, 1000, 2, this);
 
@@ -33,6 +34,7 @@ public class GDXGame {
 		this.height = realHeight;
 		this.title = title;
 		board = new Tile[realWidth][realHeight];
+		blankBoard = new Tile[realWidth][realHeight];
 		createTiles();
 		window = new JFrame(title);
 		int frames = Math.min(fps, maxFPS);
@@ -56,6 +58,7 @@ public class GDXGame {
 				Tile t = new Tile(i, j, i * cubeSize, j * cubeSize, cubeSize, this);
 				t.setColor(Color.gray);
 				board[i][j] = t;
+				blankBoard[i][j] = t;
 				count++;
 			}
 		}
@@ -64,6 +67,10 @@ public class GDXGame {
 
 	public Tile[][] getBoard() {
 		return board;
+	}
+	
+	public Tile[][] getBlankBoard(){
+		return blankBoard;
 	}
 	
 	public void setBoard(Tile[][] newBoard) {
@@ -104,5 +111,8 @@ public class GDXGame {
 	public void setTitle(String t) {
 		this.getWindow().setTitle(t);
 	}
-
+	
+	public void refreshDisplay() {
+		panel.repaint();
+	}
 }
