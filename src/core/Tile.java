@@ -299,7 +299,9 @@ public class Tile {
 		g.setColor(color);
 		g.fillRect(x, y, size, size);
 		g.setColor(edgeColor);
-		g.drawString(displayString, x, y+size);
+		if(!displayString.equals("0") && game.isDisplayingNeighborCounts) {
+			g.drawString(displayString, x, y+size);
+		}
 		g.drawRect(x, y, size, size);
 	}
 }

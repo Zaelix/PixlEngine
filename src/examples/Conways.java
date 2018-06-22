@@ -16,22 +16,32 @@ public class Conways extends GameInput {
 	static GDXGame game;
 	Random gen = new Random();
 	boolean isPaused = true;
-
+	boolean isMouseLeftDown = false;
+	boolean isMouseRightDown = false;
 	public static void main(String[] args) {
 		Conways test = new Conways();
-		game = new GDXGame(12, 12, "SUPER CONWAY BROS", test, 1);
+		game = new GDXGame(120, 60, "SUPER CONWAY BROS", test, 60);
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		if (isMouseLeftDown) {
+			Tile tile = game.getTileClicked(e);
+			tile.setColor(Color.RED);
+			tile.setDisplayString(tile.countLivingNeighbors()+"");
+		}
+		if (isMouseRightDown) {
+			Tile tile = game.getTileClicked(e);
+			tile.setColor(Color.gray);
+			tile.setDisplayString(tile.countLivingNeighbors()+"");
+		}
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -42,7 +52,7 @@ public class Conways extends GameInput {
 			tile.setColor(Color.RED);
 			tile.setDisplayString(tile.countLivingNeighbors()+"");
 		}
-		if (e.getButton() == 2) {
+		if (e.getButton() == 3) {
 			Tile tile = game.getTileClicked(e);
 			tile.setColor(Color.gray);
 			tile.setDisplayString(tile.countLivingNeighbors()+"");
@@ -52,18 +62,28 @@ public class Conways extends GameInput {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		if (e.getButton() == 1) {
+			isMouseLeftDown = true;
+		}
+		if (e.getButton() == 3) {
+			isMouseRightDown = true;
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getButton() == 1) {
+			isMouseLeftDown = false;
+		}
+		if (e.getButton() == 3) {
+			isMouseRightDown = false;
+		}
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -89,13 +109,10 @@ public class Conways extends GameInput {
 			isPaused = false;
 			System.out.println("Unpaused!");
 		} else if (e.getKeyChar() == 'u') {
-			System.out.println("Updating Living Counts!");
-			for (Tile[] tA : game.getBoard()) {
-				for (Tile t : tA) {
-					t.setDisplayString(t.countLivingNeighbors()+"");
-				}
-			}
-		} else {
+			updateLivingCounts();
+		}else if (e.getKeyChar() == 'd') {
+			game.toggleNeighborCountDisplay();
+		}else {
 			for (Tile[] tA : game.getBoard()) {
 				for (Tile t : tA) {
 					int x = new Random().nextInt(10);
@@ -123,31 +140,36 @@ public class Conways extends GameInput {
 
 		} else {
 			Tile[][] board = game.getBoard();
+			updateLivingCounts();
 			newBoard = game.getBlankBoard();
 			for (int x = 0; x < board.length; x++) {
 				for (int y = 0; y < board[0].length; y++) {
-					int nLiving = board[x][y].countLivingNeighbors();
-					board[x][y].setDisplayString(nLiving + "");
+					int nLiving = board[x][y].getLivingNeighbors();
 					if (board[x][y].getColor().equals(Color.RED)) {
 						if (nLiving < 2 || nLiving > 3) {
-							System.out.println("Killed " +x + ", " + y);
 							newBoard[x][y].setColor(Color.gray);
 						} else {
-							System.out.println(x + ", " + y + "Stayed alive");
 							newBoard[x][y].setColor(Color.RED);
 						}
 					} else {
 						if (nLiving == 3) {
-							System.out.println("Revived " + x + ", " + y);
 							newBoard[x][y].setColor(Color.RED);
 						} else {
-							System.out.println(x + ", " + y + "Stayed dead");
 							newBoard[x][y].setColor(Color.gray);
 						}
 					}
 				}
 			}
 			game.setBoard(newBoard);
+			//updateLivingCounts();
+		}
+	}
+	
+	public void updateLivingCounts() {
+		for (Tile[] tA : game.getBoard()) {
+			for (Tile t : tA) {
+				t.setDisplayString(t.countLivingNeighbors()+"");
+			}
 		}
 	}
 }

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public class GDXGame {
 	public int width;
 	public int height;
+	boolean isDisplayingNeighborCounts = false;
 	int cubeSize = 35;
 	int maxFPS = 30;
 	long elapsedTime = 0;
@@ -26,7 +27,7 @@ public class GDXGame {
 	public GDXGame(int w, int h, String title, GameInput input, int fps) {
 		int tileScale = title.equals("SUPER CONWAY BROS") ? 100 : 32;
 		cubeSize = title.equals("SUPER CONWAY BROS") ? 10 : 35;
-		maxFPS = title.equals("SUPER CONWAY BROS") ? 100 : 30;
+		maxFPS = title.equals("SUPER CONWAY BROS") ? 1000 : 30;
 		
 		int realWidth = Math.max(Math.min(w, tileScale), 0);
 		int realHeight = Math.max(Math.min(h, tileScale), 0);
@@ -114,5 +115,10 @@ public class GDXGame {
 	
 	public void refreshDisplay() {
 		panel.repaint();
+	}
+
+	public void toggleNeighborCountDisplay() {
+		isDisplayingNeighborCounts = !isDisplayingNeighborCounts;
+		
 	}
 }
