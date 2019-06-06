@@ -89,7 +89,12 @@ public class Tile {
 		}
 		t.setColor(r2, g2, b2);
 	}
-	
+	/**
+	 * Takes two numbers, and returns the modified parameter b to be closer to parameter a.
+	 * @param a : The first number
+	 * @param b : The second number
+	 * @return int : A modified version of the second number which is 1 closer to the first parameter.
+	 */
 	private int convergeNumbers(int a, int b) {
 		if(a > b) {
 			return b+1;
@@ -102,11 +107,16 @@ public class Tile {
 		}
 	}
 	
-	public int countNeighborsWithColor(Color c) {
+	/**
+	 * Counts the number of neighbors of this Tile which are currently the given color, and sets the livingNeighbors count to this number.
+	 * @param color : The color you wish to check for.
+	 * @return int : The total count of neighbors with the given color.
+	 */
+	public int countNeighborsWithColor(Color color) {
 		Tile[] neighbors = getAllNeighbors();
 		int nLiving = 0;
 		for (Tile n : neighbors) {
-			if (n.getColor().equals(c)) {
+			if (n.getColor().equals(color)) {
 				nLiving++;
 			}
 		}
@@ -114,6 +124,10 @@ public class Tile {
 		return nLiving;
 	}
 	
+	/**
+	 * Gets the number of this tile's neighbors that are alive.
+	 * @return int : The livingNeighbors count
+	 */
 	public int getLivingNeighbors() {
 		return this.livingNeighbors;
 	}
@@ -138,7 +152,7 @@ public class Tile {
 	
 	/**
 	 * Gets all adjacent tiles to the tile that is calling the function.
-	 * @return Tile[] object
+	 * @return Tile[] object.
 	 */
 	public Tile[] getAdjacentNeighbors() {
 		Tile[] neighbors = new Tile[4];
@@ -151,7 +165,7 @@ public class Tile {
 	
 	/**
 	 * Gets all diagonal tiles to the tile that is calling the function.
-	 * @return Tile[] object
+	 * @return Tile[] object.
 	 */
 	public Tile[] getDiagonalNeighbors() {
 		Tile[] neighbors = new Tile[4];
@@ -164,7 +178,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getTopNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -178,7 +192,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly below the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getBottomNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -192,7 +206,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly to the left of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getLeftNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -206,7 +220,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly to the right of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -221,7 +235,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above and to the right of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getTopRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -236,7 +250,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly below and to the right of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getBottomRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -251,7 +265,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above and to the left of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile object.
 	 */
 	public Tile getTopLeftNeighbor() {
 		int cubeSize = game.getCubeSize();
