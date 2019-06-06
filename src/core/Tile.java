@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+/**
+ * @author Stemsation1
+ *
+ */
 public class Tile {
 	GDXGame game;
 	int num;
@@ -133,7 +137,7 @@ public class Tile {
 	}
 	/**
 	 * Gets all neighboring tiles of the tile that is calling the function.
-	 * @return Tile[] object
+	 * @return Tile[] : An array of this Tile's eight neighbors.
 	 */
 	public Tile[] getAllNeighbors() {
 		Tile[] neighbors = new Tile[8];
@@ -152,7 +156,7 @@ public class Tile {
 	
 	/**
 	 * Gets all adjacent tiles to the tile that is calling the function.
-	 * @return Tile[] object.
+	 * @return Tile[] : An array of this Tile's four adjacent neighbors.
 	 */
 	public Tile[] getAdjacentNeighbors() {
 		Tile[] neighbors = new Tile[4];
@@ -165,7 +169,7 @@ public class Tile {
 	
 	/**
 	 * Gets all diagonal tiles to the tile that is calling the function.
-	 * @return Tile[] object.
+	 * @return Tile[] : An array of this Tile's four diagonal neighbors.
 	 */
 	public Tile[] getDiagonalNeighbors() {
 		Tile[] neighbors = new Tile[4];
@@ -178,7 +182,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Top Center neighbor.
 	 */
 	public Tile getTopNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -192,7 +196,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly below the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Bottom Center neighbor.
 	 */
 	public Tile getBottomNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -206,7 +210,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly to the left of the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Center Left neighbor.
 	 */
 	public Tile getLeftNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -220,7 +224,7 @@ public class Tile {
 	}
 	/**
 	 * Gets the Tile object directly to the right of the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Center Right neighbor.
 	 */
 	public Tile getRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -235,7 +239,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above and to the right of the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Top Right neighbor.
 	 */
 	public Tile getTopRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -250,7 +254,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly below and to the right of the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Bottom Right neighbor.
 	 */
 	public Tile getBottomRightNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -265,7 +269,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly above and to the left of the tile object that is calling the function.
-	 * @return Tile object.
+	 * @return Tile : The Tile object which is this Tile's Top Left neighbor.
 	 */
 	public Tile getTopLeftNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -280,7 +284,7 @@ public class Tile {
 	
 	/**
 	 * Gets the Tile object directly below and to the left of the tile object that is calling the function.
-	 * @return Tile object
+	 * @return Tile : The Tile object which is this Tile's Bottom Left neighbor.
 	 */
 	public Tile getBottomLeftNeighbor() {
 		int cubeSize = game.getCubeSize();
@@ -293,22 +297,39 @@ public class Tile {
 		else return game.fakeTile; 
 	}
 	
+	/**
+	 * Returns this Tile's y position on the screen.
+	 * @return int : This Tile's vertical pixel position.
+	 */
 	private int getY() {
 		return y;
 	}
 
+	/**
+	 * Returns this Tile's x position on the screen.
+	 * @return int : This Tile's horizontal pixel position.
+	 */
 	private int getX() {
 		return x;
 	}
-	
+	/**
+	 * Returns this Tile's y position on the game board array.
+	 * @return int : This Tile's vertical position on this game's board object.
+	 */
 	private int getBoardY() {
 		return boardY;
 	}
-
+	/**
+	 * Returns this Tile's x position on the game board array.
+	 * @return int : This Tile's horizontal position on this game's board object.
+	 */
 	private int getBoardX() {
 		return boardX;
 	}
-
+	/**
+	 * Displays this Tile on the given Graphics object.
+	 * @param g : The Graphics object used to display this Tile.
+	 */
 	public void render(Graphics g) {
 		g.setColor(color);
 		g.fillRect(x, y, size, size);
